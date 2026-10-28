@@ -1,0 +1,52 @@
+import java.util.Scanner;
+import java.util.Stack;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        Stack<String> undoStack = new Stack<>();
+        String text = "";
+
+        while (true) {
+            System.out.println("\n--- Text Editor ---");
+            System.out.println("1. Enter text");
+            System.out.println("2. Undo");
+            System.out.println("3. Show text");
+            System.out.println("4. Exit");
+            System.out.print("Choose an option: ");
+
+            int choice = input.nextInt();
+            input.nextLine();
+
+            switch (choice) {
+                case 1:
+                    undoStack.push(text);
+                    System.out.print("Enter your text: ");
+                    text = input.nextLine();
+                    System.out.println("Text saved.");
+                    break;
+
+                case 2:
+                    if (!undoStack.empty()) {
+                        text = undoStack.pop();
+                        System.out.println("Last change undone.");
+                    } else {
+                        System.out.println("Nothing to undo.");
+                    }
+                    break;
+
+                case 3:
+                    System.out.println("Current text: " + text);
+                    break;
+
+                case 4:
+                    System.out.println("Thank you for using the Text Editor.");
+                    input.close();
+                    return;
+
+                default:
+                    System.out.println("Invalid choice. Try again.");
+            }
+        }
+    }
+}
